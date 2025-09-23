@@ -1,126 +1,124 @@
-# Notes Keeper
+# 📝 Notes Keeper
 
-> A modern, Google Keep-inspired notes application with colorful notes, responsive design, and full CRUD functionality.
+A modern, Google Keep-inspired notes application with colorful notes, responsive design, and full CRUD functionality.
 
-## 🚀 Quick Start
+## 🚀 Features
 
-### Prerequisites
+- **📝 Create Notes**: Add notes with title and content
+- **✏️ Edit Notes**: Modify existing notes inline
+- **🗑️ Delete Notes**: Remove notes with confirmation
+- **🎨 Color Coding**: 12 predefined color themes
+- **📱 Responsive Design**: Mobile-first approach
+- **⚡ Real-time Updates**: Instant UI updates
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+- React 19.1.1
+- CSS3
+- JavaScript ES6+
+
+**Backend:**
+- Node.js
+- Express.js
+- MySQL
+
+**Development:**
+- Nodemon
+- Concurrently
+
+## 📋 Prerequisites
+
 - Node.js (v14 or higher)
 - MySQL Server
 - npm or yarn
 
-### Installation
+## ⚡ Quick Start
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd notes-keeper
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Database Setup**
-   ```sql
-   -- Run in MySQL
-   CREATE DATABASE notes_db;
-   USE notes_db;
-   
-   CREATE TABLE notes (
-     id INT AUTO_INCREMENT PRIMARY KEY,
-     title VARCHAR(255) NOT NULL,
-     content TEXT NOT NULL,
-     color VARCHAR(20) DEFAULT '#ffffff',
-     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-   );
-   ```
-
-4. **Configure Database Connection**
-   Update `backend/server.js` with your MySQL credentials:
-   ```javascript
-   const db = mysql.createConnection({
-     host: 'localhost',
-     user: 'your_username',
-     password: 'your_password',
-     database: 'notes_db'
-   });
-   ```
-
-5. **Start the Application**
-   ```bash
-   npm run dev
-   ```
-
-   This runs both frontend (port 3000) and backend (port 5002) concurrently.
-
-## 🏗️ Architecture
-
-### Tech Stack
-- **Frontend**: React 19.1.1, CSS3
-- **Backend**: Node.js, Express.js
-- **Database**: MySQL
-- **Development**: Concurrently, Nodemon
-
-### Project Structure
-```
-notes-keeper/
-├── backend/
-│   ├── server.js          # Express server & API routes
-│   ├── database.sql       # Database schema
-│   └── package.json       # Backend dependencies
-├── frontend/
-│   ├── src/
-│   │   ├── App.js         # Main React component
-│   │   ├── App.css        # Styling
-│   │   └── index.js       # React entry point
-│   └── package.json       # Frontend dependencies
-└── package.json           # Root package with dev scripts
+### 1. Clone the repository
+```bash
+git clone <repository-url>
+cd notes-keeper
 ```
 
-## 🎨 Features
+### 2. Database Setup
+```sql
+-- Run in MySQL
+CREATE DATABASE notes_db;
+USE notes_db;
 
-### Core Functionality
-- ✅ **Create Notes**: Add notes with title and content
-- ✅ **Edit Notes**: Modify existing notes inline
-- ✅ **Delete Notes**: Remove notes with confirmation
-- ✅ **Color Coding**: 12 predefined color themes
-- ✅ **Responsive Design**: Mobile-first approach
-- ✅ **Real-time Updates**: Instant UI updates
-
-### UI/UX
-- **Google Keep Style**: Clean, card-based interface
-- **Masonry Grid**: Auto-adjusting responsive layout
-- **Hover Effects**: Smooth animations and transitions
-- **Color Picker**: Visual color selection
-- **Mobile Optimized**: Touch-friendly interactions
-
-## 🔌 API Reference
-
-### Base URL
-```
-http://localhost:5002/api
+CREATE TABLE notes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  content TEXT NOT NULL,
+  color VARCHAR(20) DEFAULT '#ffffff',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
 ```
 
-### Endpoints
+### 3. Install Dependencies
+```bash
+# Install root dependencies
+npm install
 
+# Install backend dependencies
+cd backend && npm install
+
+# Install frontend dependencies
+cd ../frontend && npm install
+```
+
+### 4. Configure Database
+Update database credentials in `backend/server.js`:
+```javascript
+const db = mysql.createConnection({
+  host: 'localhost',
+  user: 'your_username',
+  password: 'your_password',
+  database: 'notes_db'
+});
+```
+
+### 5. Run the Application
+
+**Method 1: Run separately (Recommended)**
+```bash
+# Terminal 1 - Frontend
+cd frontend
+npm install
+npm start
+
+# Terminal 2 - Backend
+cd backend
+npm install
+npm start
+```
+
+**Method 2: Run both together**
+```bash
+# From root directory - runs both frontend and backend
+npm run dev
+```
+
+## 📡 API Endpoints
+
+### Notes
 | Method | Endpoint | Description | Request Body |
 |--------|----------|-------------|-------------|
-| GET | `/notes` | Retrieve all notes | - |
-| POST | `/notes` | Create new note | `{title, content, color}` |
-| PUT | `/notes/:id` | Update existing note | `{title, content, color}` |
-| DELETE | `/notes/:id` | Delete note | - |
+| GET | `/api/notes` | Get all notes | - |
+| POST | `/api/notes` | Create new note | `{title, content, color}` |
+| PUT | `/api/notes/:id` | Update note | `{title, content, color}` |
+| DELETE | `/api/notes/:id` | Delete note | - |
 
-### Response Format
-```json
-{
-  "id": 1,
-  "title": "Sample Note",
-  "content": "Note content here",
-  "color": "#ffeb3b",
-  "created_at": "2024-01-01T00:00:00.000Z"
-}
+## 🗄️ Database Schema
+
+### Notes Table
+```sql
+id          INT AUTO_INCREMENT PRIMARY KEY
+title       VARCHAR(255) NOT NULL
+content     TEXT NOT NULL
+color       VARCHAR(20) DEFAULT '#ffffff'
+created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ```
 
 ## 🎨 Color Palette
@@ -140,85 +138,48 @@ http://localhost:5002/api
 | Teal | `#009688` | Goals |
 | Green | `#4caf50` | Completed |
 
-## 📱 Usage Guide
+## 🎯 Usage
 
-1. **Adding Notes**
-   - Fill in title and content in the form
-   - Select desired color from picker
-   - Click "Add Note" to save
+### Adding Notes
+1. Fill in title and content in the form
+2. Select desired color from picker
+3. Click "Add Note" to save
 
-2. **Editing Notes**
-   - Hover over any note card
-   - Click the edit icon (✏️)
-   - Modify content and click "Update Note"
+### Editing Notes
+1. Hover over any note card
+2. Click the edit icon (✏️)
+3. Modify content and click "Update Note"
 
-3. **Deleting Notes**
-   - Hover over any note card
-   - Click the delete icon (🗑️)
-   - Note is permanently removed
+### Deleting Notes
+1. Hover over any note card
+2. Click the delete icon (🗑️)
+3. Note is permanently removed
 
-## 🛠️ Development
+## 📁 Project Structure
 
-### Available Scripts
-
-```bash
-# Start both frontend and backend
-npm run dev
-
-# Start backend only
-npm run server
-
-# Start frontend only
-npm run client
-
-# Install all dependencies
-npm install
 ```
-
-### Development Workflow
-1. Backend runs on `http://localhost:5002`
-2. Frontend runs on `http://localhost:3000`
-3. Hot reload enabled for both environments
-4. CORS configured for cross-origin requests
-
-## 🚀 Deployment
-
-### Production Build
-```bash
-cd frontend
-npm run build
+notes-keeper/
+├── backend/
+│   ├── server.js          # Express server & API routes
+│   ├── database.sql       # Database schema
+│   └── package.json       # Backend dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── App.js         # Main React component
+│   │   ├── App.css        # Styling
+│   │   └── index.js       # React entry point
+│   └── package.json       # Frontend dependencies
+└── package.json           # Root package with dev scripts
 ```
-
-### Environment Variables
-Create `.env` files for production:
-- Database credentials
-- API endpoints
-- Port configurations
 
 ## 🤝 Contributing
 
 1. Fork the repository
-2. Create feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit changes (`git commit -m 'Add amazing feature'`)
-4. Push to branch (`git push origin feature/amazing-feature`)
-5. Open Pull Request
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 License
+## 📞 Support
 
-This project is licensed under the MIT License.
-
-## 🐛 Known Issues
-
-- Database connection requires manual configuration
-- No user authentication implemented
-- Limited to single-user environment
-
-## 🔮 Future Enhancements
-
-- [ ] User authentication & authorization
-- [ ] Note sharing capabilities
-- [ ] Search and filter functionality
-- [ ] Rich text editor
-- [ ] File attachments
-- [ ] Categories and tags
-- [ ] Dark mode theme
+For support, email us- info@virustechsolutions.com or create an issue in this repository.
